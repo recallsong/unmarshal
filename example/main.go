@@ -1,19 +1,3 @@
-# unmarshal
-将 环境变量、default、flag、自定义数据源 等绑定到结构体.
-
-绑定类型支持：
-* string
-* bool
-* int、int8、int16、int32、int64
-* uint、uint8、uint16、uint32、uint64
-* float32、float64
-* slice
-* map
-* time.Duration
-* 自定义接口/类型等
-
-# Example
-```go
 package main
 
 import (
@@ -86,4 +70,3 @@ func main() {
 	flags.Parse(os.Args[1:])
 	fmt.Println(cfg)
 }
-```
