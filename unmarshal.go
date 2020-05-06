@@ -37,9 +37,6 @@ func Unmarshal(
 		for _, tag := range tags {
 			tagvals = append(tagvals, field.Tag.Get(tag))
 		}
-		if check != nil && !check(field.Name, tagvals) {
-			continue
-		}
 		ftyp := field.Type
 		fval := data.Field(i)
 		var value *reflect.Value
@@ -66,6 +63,10 @@ func Unmarshal(
 				}
 			}
 		}
+		// TODO ...
+		// if check != nil && !check(field.Name, tagvals) {
+		// 	continue
+		// }
 		if value != nil {
 			err := setter(field.Name, tagvals, value.Type(), *value)
 			if err != nil {
