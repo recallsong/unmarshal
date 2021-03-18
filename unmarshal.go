@@ -33,12 +33,14 @@ func Unmarshal(
 	num := typ.NumField()
 	for i := 0; i < num; i++ {
 		field := typ.Field(i)
+		ftyp, fval := field.Type, data.Field(i)
+		if !fval.CanSet() {
+			continue
+		}
 		var tagvals []string
 		for _, tag := range tags {
 			tagvals = append(tagvals, field.Tag.Get(tag))
 		}
-		ftyp := field.Type
-		fval := data.Field(i)
 		var value *reflect.Value
 		if ftyp.Kind() == reflect.Ptr {
 			for ftyp.Kind() == reflect.Ptr {

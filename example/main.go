@@ -16,13 +16,15 @@ type subConfig struct {
 }
 
 type config struct {
-	Name       string `flag:"name" env:"NAME" default:"recallsong" desc:"name"`
-	SubConfig  *subConfig
-	Duration   time.Duration          `flag:"duration" env:"DURATION" default:"1ns" desc:"duration"`
-	Map        map[string]interface{} `env:"MAP" default:"{\"age\":123}"`
-	URLs       []string               `flag:"urls" env:"URLS" default:"http://localhost:80,http://localhost:81,http://localhost:82" desc:"urls"`
-	Numbers    []int                  `flag:"numbers" env:"NUMBERS" default:"123,456,789" desc:"numbers"`
-	CustomData customData             `flag:"custom" env:"CUSTOM" default:"custom value" desc:"custom"`
+	Name          string `flag:"name" env:"NAME" default:"recallsong" desc:"name"`
+	SubConfig     *subConfig
+	Duration      time.Duration          `flag:"duration" env:"DURATION" default:"1ns" desc:"duration"`
+	Map           map[string]interface{} `env:"MAP" default:"{\"age\":123}"`
+	URLs          []string               `flag:"urls" env:"URLS" default:"http://localhost:80,http://localhost:81,http://localhost:82" desc:"urls"`
+	Numbers       []int                  `flag:"numbers" env:"NUMBERS" default:"123,456,789" desc:"numbers"`
+	CustomData    customData             `flag:"custom" env:"CUSTOM" default:"custom value" desc:"custom"`
+	privideStruct subConfig
+	privideString string
 }
 
 type customData struct {
