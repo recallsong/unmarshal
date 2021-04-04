@@ -109,12 +109,12 @@ var (
 )
 
 // BindText .
-func BindText(data reflect.Value, tag string, key func(string) string) error {
+func BindText(data reflect.Value, tag string, key func(string) (string, bool)) error {
 	return Unmarshal(
 		data, []string{tag}, &TextUnmarshalerType, SkipEmpty,
 		func(field string, tags []string, ftyp reflect.Type, fval reflect.Value) (err error) {
-			text := key(tags[0])
-			if len(text) <= 0 {
+			text, ok := key(tags[0])
+			if !ok {
 				return nil
 			}
 			if ftyp.AssignableTo(TextUnmarshalerType) {
@@ -247,7 +247,7 @@ func BindEnv(data interface{}) error {
 }
 
 // KeyValue .
-func KeyValue(k string) string { return k }
+func KeyValue(k string) (string, bool) { return k, true }
 
 // EnvValue .
-func EnvValue(k string) string { return os.Getenv(k) }
+func EnvValue(k string) (string, bool) { return os.LookupEnv(k) }
